@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IT Kolledž - i244: Allar Vendla - Veenäidu teatamise (veebi)rakendus - Registreeri</title>
+</head>
+<body>
+Registreeri uus kasutaja.
+<form action="register.html" method="post">
+    <label for="username">Kasutaja:</label>
+    <input id="username" name="username" type="text" placeholder="Sisesta kasutajanimi">
+    <br>
+    <label for="password">Parool:</label>
+    <input id="password" name="password" type="password" placeholder="Sisesta parool">
+    <br>
+    <label for="confirm-password">Kinnita parool:</label>
+    <input id="confirm-password" name="confirm-password" type="password" placeholder="Kinnita parool">
+    <br>
+    <label for="email">E-mail:</label>
+    <input id="email" name="email" type="email" placeholder="Sisesta e-mail">
+    <br>
+    <label for="area">Piirkond:</label>
+    <select id="area" name="area">
+        <option value="0" selected>Vali..</option>
+        <option value="1">Tartu</option>
+        <option value="2">Tallinn</option>
+        <option value="3">Võru</option>
+    </select>
+    <br>
+    <!--
+    Järgnev valik peaks sõltuma eelnevast.. Javascript/PHP - ilmselt natukene mõlemat.
+    -->
+    <label for="condo">Korteriühistu:</label>
+    <select id="condo" name="condo">
+        <option value="0" selected>Vali..</option>
+        <option value="1">Sinilille</option>
+        <option value="2">Varblase</option>
+        <option value="3">Kanarbiku</option>
+    </select>
+    <br>
+    <input type="submit" value="Registreeri">
+</form>
+</body>
+</html>
