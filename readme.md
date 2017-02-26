@@ -40,9 +40,9 @@ Kasutaja saab vaadata tarbimisajalugu, kui on sisse logitud
 
 ### Lisa
 * Algoritm
-![alt text](assets/data/img/algoritm.png "Algoritm")
+![alt text](assets/data/images/algoritm.png "Algoritm")
 * Andmebaas
-![alt text](assets/data/img/dbTables.png "Algoritm")
+![alt text](assets/data/images/dbTables.png "Algoritm")
 
 ## Litsents
 Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)
