@@ -8,9 +8,20 @@
 </head>
 <body>
 <div id="header">
-    <h1>Veenäidu teatamise rakendus</h1>
-    <p>Tänane kuupäev: <span id="current-date"></span></p>
-    <p>Näidu teatamiseni jäänud: <span id="days-remaining"></span></p>
+    <h1 id="title">Veenäidu teatamise rakendus</h1>
+    <div id="menu">
+        <ul>
+            <li><a href="index.php">Avaleht</a></li>
+            <li><a href="view/register.html">Registreeri</a></li>
+            <li><a href="#">Logi sisse</a></li>
+        </ul>
+    </div>
+    <div id="date">
+        Tänane kuupäev: <span id="current-date"></span>.
+        <br>
+        Näidu teatamiseni jäänud: <span id="days-remaining"></span>.
+    </div>
+
 </div>
 <div id="content">
     <p>Siia tuleb lehe sisu</p>
