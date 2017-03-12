@@ -1,7 +1,56 @@
 #header {
     min-height: 95px;
+    max-width: 1024px;
     color: coral;
+    background-color: #ddffd3;
+    align-content: center;
+    clear: both;
+    margin-right: auto;
+    margin-left: auto;
 }
+
+#date {
+    text-align: right;
+    padding-bottom: 5px;
+    padding-right: 5px;
+}
+
+#menu ul {
+    list-style: none;
+    background-color: #38bd00;
+    text-align: center;
+}
+
+#menu li {
+    height: 50px;
+    font: 30px Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#menu a {
+    line-height: 50px;
+    width: 170px;
+    text-decoration: none;
+    display: block;
+    color: black;
+    transition: .3s background-color;
+}
+
+#menu a:hover {
+    background-color: #ddffd3;
+
+}
+
+#content {
+    max-width: 1024px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #EBEBEB;
+    clear: both;
+}
+
 .register-form label {
     font: 13px Arial, Helvetica, sans-serif;
     font-weight: bold;
@@ -27,7 +76,7 @@
 
 #register-button {
     padding: 0;
-    background: #56ea00;
+    background: #38bd00;
     color: white;
     border-style: outset;
     border-color: #6a3500;
@@ -37,5 +86,5 @@
     font: bold 15px arial, sans-serif;
 }
 #register-button:hover {
-    background: #38bd00;
+    background: #56ea00;
 }
