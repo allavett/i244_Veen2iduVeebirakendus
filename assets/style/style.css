@@ -66,7 +66,6 @@
 }
 .register-form input:focus, select:focus {
     border: 1px solid #38bd00;
-    background-color: #ddffd3;
 }
 
 .register-form select.select-option:focus {
@@ -78,13 +77,27 @@
     padding: 0;
     background: #38bd00;
     color: white;
-    border-style: outset;
-    border-color: #6a3500;
+    border: outset #6a3500;
     border-radius: 3px;
+    border-width: 1px;
     height: 25px;
     width: 100px;
     font: bold 15px arial, sans-serif;
 }
-#register-button:hover {
+
+#register-button:disabled {
+    background: #92bfa3;
+    color: #acddbf;
+}
+
+#register-button:hover:not([disabled]) {
     background: #56ea00;
+}
+
+.field-incorrect, .field-incorrect input:focus {
+    background-color: lightpink;
+}
+
+.field-correct {
+    background-color: lightgreen;
 }
