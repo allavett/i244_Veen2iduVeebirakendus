@@ -7,26 +7,23 @@
     <script src="assets/script/timer.js"></script>
 </head>
 <body>
-<div id="header">
-    <h1 id="title">Veenäidu teatamise rakendus</h1>
-    <div id="menu">
-        <ul>
-            <li><a href="index.php">Avaleht</a></li>
-            <li><a href="view/register.html">Registreeri</a></li>
-            <li><a href="#">Logi sisse</a></li>
-        </ul>
-    </div>
-    <div id="date">
-        Tänane kuupäev: <span id="current-date"></span>.
-        <br>
-        Näidu teatamiseni jäänud: <span id="days-remaining"></span>.
-    </div>
 
-</div>
-<div id="content">
-    <p>Siia tuleb lehe sisu</p>
-    <br/>
-    <img src="assets/data/images/web-development-pic.png" alt="Võrgurakenduse komponendid">
-</div>
+<?php
+include_once('view/head.html');
+
+echo '<div id="content">';
+
+if(!empty($_GET['view'])){
+    switch ($_GET['view']) {
+        case 'register': include ('view/register.html');
+        break;
+        default: include ('view/main.html');
+    }
+} else {
+    include ('view/main.html');
+}
+echo '</div>';
+include_once('view/foot.html');
+?>
 </body>
 </html>

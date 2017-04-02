@@ -101,3 +101,9 @@
 .field-correct {
     background-color: lightgreen;
 }
+
+.footer {
+    min-height: 95px;
+    max-width: 1024px;
+    margin: auto;
+}
