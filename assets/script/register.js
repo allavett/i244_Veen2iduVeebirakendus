@@ -3,7 +3,7 @@
  */
 var formInputFields, submitButton, usernameFilled, passwordFilled, emailFilled, areaFilled, condoFilled;
 
-formInputFields = ["username", "password", "confirm-password", "email", "area", "condo", "register-button"];
+formInputFields = ["username", "password", "password-confirm", "email", "area", "condo", "register-button"];
 usernameFilled = false;
 passwordFilled = false;
 emailFilled = false;
@@ -38,7 +38,7 @@ function checkInput(inputField){
         case "password":
             checkLength();
             break;
-        case "confirm-password":
+        case "password-confirm":
             passwordFilled = checkLength();
             break;
         case "email":

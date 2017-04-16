@@ -9,21 +9,14 @@
 <body>
 
 <?php
-include_once('view/head.html');
+include_once('./view/head.html');
 
 echo '<div id="content">';
 
-if(!empty($_GET['view'])){
-    switch ($_GET['view']) {
-        case 'register': include ('view/register.html');
-        break;
-        default: include ('view/main.html');
-    }
-} else {
-    include ('view/main.html');
-}
+include_once ('./controller/controller.php');
+
 echo '</div>';
-include_once('view/foot.html');
+include_once('./view/foot.html');
 ?>
 </body>
 </html>
