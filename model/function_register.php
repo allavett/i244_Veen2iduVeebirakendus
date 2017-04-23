@@ -17,22 +17,22 @@ function register(){
                 switch ($key) {
                     case "username":
                         $username = check_input($value);
-                    break;
+                        break;
                     case "password":
                         $password = check_input($value);
-                    break;
+                        break;
                     case "passwordConfirm":
                         $passwordConfirm = check_input($value);
-                    break;
+                        break;
                     case "email":
                         $email = check_input($value);
-                    break;
+                        break;
                     case "area":
                         $area = check_input($value);
                         break;
                     case "condo":
                         $condo = check_input($value);
-                    break;
+                        break;
                 }
             } else {
                 $registerErrors[$key] = "Väli täitmata!";

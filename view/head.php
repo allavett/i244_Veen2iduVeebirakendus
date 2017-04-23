@@ -7,7 +7,8 @@
         <ul>
             <li><a href="index.php">Avaleht</a></li>
             <li><a href="index.php?view=register">Registreeri</a></li>
-            <li><a href="#">Logi sisse</a></li>
+            <li><?php echo isset($_SESSION["user"]) ? '<a href="index.php?action=logout">Logi välja</a>' :
+                    '<a href="index.php?view=login">Logi sisse</a>';?></li>
         </ul>
     </div>
     <div id="date">

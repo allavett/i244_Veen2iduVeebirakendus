@@ -9,14 +9,7 @@
 <body>
 
 <?php
-include_once('./view/head.html');
-
-echo '<div id="content">';
-
-include_once ('./controller/controller.php');
-
-echo '</div>';
-include_once('./view/foot.html');
+    include_once ('./controller/controller.php');
 ?>
 </body>
 </html>

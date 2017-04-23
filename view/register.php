@@ -1,5 +1,4 @@
-<link rel="stylesheet" type="text/css" href="assets/style/style.css"/>
-<!--script src="assets/script/register.js"></script-->
+<script src="assets/script/register.js"></script>
 
 <h1>Registreeri uus kasutaja.</h1>
 
@@ -52,7 +51,7 @@
                 <td><?php if (isset($registerErrors["condo"])) {echo $registerErrors["condo"];} ?></td>
             </tr>
             <tr>
-                <td colspan="2"><input id="register-button" type="submit" name="register" value="Registreeri"> <!--disabled--></td>
+                <td colspan="3"><input id="register-button" type="submit" name="register" value="Registreeri" disabled></td>
             </tr>
 
         </table>

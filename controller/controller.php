@@ -7,6 +7,8 @@
  */
 
 require_once ('./model/function_register.php');
+require_once ('./model/function_login_logout.php');
+require_once ('./model/function_session.php');
 
 $view = $action = "";
 
@@ -21,13 +23,29 @@ if (!empty($_GET['action'])){
 switch ($action) {
     case 'register':
         register();
-    break;
+        break;
+    case 'login':
+        login();
+        break;
+    case 'logout':
+        logout();
+        break;
 }
+
+startSession();
+// Load Page
+include_once('./view/head.php');
+echo '<div id="content">';
 
 switch ($view) {
     case 'register':
         include_once ('./view/register.php');
-    break;
+        break;
+    case 'login':
+        include_once ('./view/login.php');
+        break;
     default: include_once ('./view/main.html');
 }
 
+echo '</div>';
+include_once('./view/foot.html');

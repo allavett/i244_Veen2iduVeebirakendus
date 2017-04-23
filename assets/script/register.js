@@ -3,7 +3,7 @@
  */
 var formInputFields, submitButton, usernameFilled, passwordFilled, emailFilled, areaFilled, condoFilled;
 
-formInputFields = ["username", "password", "password-confirm", "email", "area", "condo", "register-button"];
+formInputFields = ["username", "password", "confirm-password", "email", "area", "condo", "register-button"];
 usernameFilled = false;
 passwordFilled = false;
 emailFilled = false;
@@ -14,8 +14,9 @@ window.document.addEventListener("DOMContentLoaded", function () {
     submitButton = document.getElementById("register-button");
     formInputFields.forEach(function (inputFieldId) {
         var inputField;
-        inputField = document.getElementById(inputFieldId);
         console.log(inputField);
+        inputField = document.getElementById(inputFieldId);
+
         inputField.addEventListener("click", function(){
             checkInput(inputField)
         });
@@ -38,7 +39,7 @@ function checkInput(inputField){
         case "password":
             checkLength();
             break;
-        case "password-confirm":
+        case "confirm-password":
             passwordFilled = checkLength();
             break;
         case "email":
@@ -51,8 +52,8 @@ function checkInput(inputField){
             condoFilled = checkValue();
             break;
         case "register-button":
-            alert("Ju stupiido!");
-            event.preventDefault();
+            /*alert("Ju stupiido!");
+            event.preventDefault();*/
             break;
         default: console.log("blaa");
     }
