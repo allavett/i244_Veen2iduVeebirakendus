@@ -19,6 +19,7 @@ if (!empty($_GET['view'])){
 if (!empty($_GET['action'])){
     $action = $_GET['action'];
 }
+startSession();
 
 switch ($action) {
     case 'register':
@@ -32,7 +33,6 @@ switch ($action) {
         break;
 }
 
-startSession();
 // Load Page
 include_once('./view/head.php');
 echo '<div id="content">';
