@@ -8,8 +8,8 @@
 
 
 function register(){
-    global $registerErrors, $username, $email, $area, $condo;
-    $registerErrors = $username = $password = $passwordConfirm = $email = $area = $condo = "";
+    global $registerErrors, $username, $email, $area, $condo, $apartment;
+    $registerErrors = $username = $password = $passwordConfirm = $email = $area = $condo = $apartment = "";
     $registerErrors = array();
     if (isset($_POST["register"])) {
         foreach ($_POST as $key => $value) {
@@ -32,6 +32,9 @@ function register(){
                         break;
                     case "condo":
                         $condo = check_input($value);
+                        break;
+                    case "apartment":
+                        $apartment = check_input($value);
                         break;
                 }
             } else {

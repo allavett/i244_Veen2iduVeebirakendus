@@ -1,14 +1,15 @@
 /**
  * Created by AllarVendla on 27.02.2017.
  */
-var formInputFields, submitButton, usernameFilled, passwordFilled, emailFilled, areaFilled, condoFilled;
+var formInputFields, submitButton, usernameFilled, passwordFilled, emailFilled, areaFilled, condoFilled, apartmentFilled;
 
-formInputFields = ["username", "password", "confirm-password", "email", "area", "condo", "register-button"];
+formInputFields = ["username", "password", "confirm-password", "email", "area", "condo", "apartment", "register-button"];
 usernameFilled = false;
 passwordFilled = false;
 emailFilled = false;
 condoFilled = false;
 areaFilled = false;
+apartmentFilled = false;
 
 window.document.addEventListener("DOMContentLoaded", function () {
     submitButton = document.getElementById("register-button");
@@ -51,6 +52,9 @@ function checkInput(inputField){
         case "condo":
             condoFilled = checkValue();
             break;
+        case "apartment":
+            apartmentFilled = checkValue();
+            break;
         case "register-button":
             /*alert("Ju stupiido!");
             event.preventDefault();*/
@@ -75,7 +79,7 @@ function checkInput(inputField){
             return true;
         }
     }
-    submitButton.disabled = !(usernameFilled && passwordFilled && emailFilled && condoFilled && areaFilled);
+    submitButton.disabled = !(usernameFilled && passwordFilled && emailFilled && condoFilled && areaFilled && apartmentFilled);
     /*
     if (usernameFilled && passwordFilled && emailFilled && condoFilled && areaFilled) {
         submitButton.disabled = false;

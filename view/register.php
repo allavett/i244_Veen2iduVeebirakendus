@@ -51,6 +51,16 @@
                 <td><?php if (isset($registerErrors["condo"])) {echo $registerErrors["condo"];} ?></td>
             </tr>
             <tr>
+                <td><label for="apartment">Korter:</label></td>
+                <td><select id="apartment" class="select-option" name="apartment">
+                        <option value="0" selected>Vali..</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select></td>
+                <td><?php if (isset($registerErrors["apartment"])) {echo $registerErrors["apartment"];} ?></td>
+            </tr>
+            <tr>
                 <td colspan="3"><input id="register-button" type="submit" name="register" value="Registreeri" disabled></td>
             </tr>
 
