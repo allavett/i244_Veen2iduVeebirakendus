@@ -9,6 +9,7 @@
 require_once ('./model/function_register.php');
 require_once ('./model/function_login_logout.php');
 require_once ('./model/function_session.php');
+require_once ('./model/function_database.php');
 
 $view = $action = "";
 

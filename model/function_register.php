@@ -8,7 +8,7 @@
 
 
 function register(){
-    global $registerErrors, $username, $email, $area, $condo, $apartment;
+    global $registerErrors, $username, $password, $email, $area, $condo, $apartment;
     $registerErrors = $username = $password = $passwordConfirm = $email = $area = $condo = $apartment = "";
     $registerErrors = array();
     if (isset($_POST["register"])) {
@@ -44,6 +44,10 @@ function register(){
     } else {
         header("Location: ./index.php?view=register");
     }
+    // Kui andmed on olemas ja andmed on korrektsed - vigu ei ole - siis registreeri kasutaja (kirje andmebaasi).
+    if (empty($registerErrors)){
+        registerUser();
+    }
 }
 
 function check_input($input) {
@@ -56,3 +60,4 @@ function check_input($input) {
         return $input;
     }
 }
+
