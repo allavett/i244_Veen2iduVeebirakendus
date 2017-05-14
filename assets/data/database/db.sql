@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Loomise aeg: Aprill 30, 2017 kell 11:44 PM
+-- Loomise aeg: Mai 08, 2017 kell 11:06 PM
 -- Serveri versioon: 10.1.21-MariaDB
 -- PHP versioon: 5.6.30
 
@@ -17,8 +17,10 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Andmebaas: `veen2idurakendus`
+-- Andmebaas: `water_counter`
 --
+CREATE DATABASE IF NOT EXISTS `water_counter` DEFAULT CHARACTER SET utf8 COLLATE utf8_estonian_ci;
+USE `water_counter`;
 
 -- --------------------------------------------------------
 
@@ -29,11 +31,18 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `apartments` (
   `id` smallint(16) NOT NULL AUTO_INCREMENT,
   `condoid` smallint(16) NOT NULL,
-  `userid` smallint(16) NOT NULL,
+  `apartment` smallint(16) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `condoid` (`condoid`),
-  KEY `userid` (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+  KEY `userid` (`apartment`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Andmete tõmmistamine tabelile `apartments`
+--
+
+INSERT INTO `apartments` (`id`, `condoid`, `apartment`) VALUES
+(1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -50,7 +59,16 @@ CREATE TABLE IF NOT EXISTS `condos` (
   `city` varchar(32) COLLATE utf8_estonian_ci NOT NULL,
   `county` varchar(32) COLLATE utf8_estonian_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Andmete tõmmistamine tabelile `condos`
+--
+
+INSERT INTO `condos` (`id`, `name`, `numberofapartments`, `housenumber`, `street`, `city`, `county`) VALUES
+(1, 'Sinilille', 18, 13, 'Jalaka', 'Tartu', 'Tartumaa'),
+(2, 'Ülase', 30, 2, 'Vaba', 'Tartu', 'Tartumaa'),
+(3, 'Kihulane', 8, 69, 'Vildi', 'Võru', 'Võrumaa');
 
 -- --------------------------------------------------------
 
@@ -81,7 +99,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `apartment` smallint(16) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `apartment` (`apartment`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
+
+--
+-- Andmete tõmmistamine tabelile `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`, `apartment`) VALUES
+(4, 'allarvendla@gmai', 'parool', 'allarvendla@gmail.com', 1);
 
 --
 -- Tõmmistatud tabelite piirangud
@@ -91,8 +116,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Piirangud tabelile `apartments`
 --
 ALTER TABLE `apartments`
-  ADD CONSTRAINT `apartments_ibfk_1` FOREIGN KEY (`condoid`) REFERENCES `condos` (`id`),
-  ADD CONSTRAINT `apartments_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `apartments_ibfk_1` FOREIGN KEY (`condoid`) REFERENCES `condos` (`id`);
 
 --
 -- Piirangud tabelile `counters`

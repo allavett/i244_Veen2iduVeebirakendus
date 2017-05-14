@@ -13,6 +13,7 @@ require_once ('./model/function_database.php');
 
 $view = $action = "";
 
+getCondos();
 
 if (!empty($_GET['view'])){
     $view = $_GET['view'];

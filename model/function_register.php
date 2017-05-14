@@ -41,6 +41,7 @@ function register(){
                 $registerErrors[$key] = "Väli täitmata!";
             }
         }
+        checkPostedCondoInformation();
     } else {
         header("Location: ./index.php?view=register");
     }
