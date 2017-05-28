@@ -16,19 +16,14 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
---
--- Andmebaas: `water_counter`
---
-CREATE DATABASE IF NOT EXISTS `water_counter` DEFAULT CHARACTER SET utf8 COLLATE utf8_estonian_ci;
-USE `water_counter`;
 
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `apartments`
+-- Tabeli struktuur tabelile `10162970_apartments`
 --
 
-CREATE TABLE IF NOT EXISTS `apartments` (
+CREATE TABLE IF NOT EXISTS `10162970_apartments` (
   `id` smallint(16) NOT NULL AUTO_INCREMENT,
   `condoid` smallint(16) NOT NULL,
   `apartment` smallint(16) NOT NULL,
@@ -38,19 +33,19 @@ CREATE TABLE IF NOT EXISTS `apartments` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
--- Andmete tõmmistamine tabelile `apartments`
+-- Andmete tõmmistamine tabelile `10162970_apartments`
 --
 
-INSERT INTO `apartments` (`id`, `condoid`, `apartment`) VALUES
+INSERT INTO `10162970_apartments` (`id`, `condoid`, `apartment`) VALUES
 (1, 1, 1);
 
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `condos`
+-- Tabeli struktuur tabelile `10162970_condos`
 --
 
-CREATE TABLE IF NOT EXISTS `condos` (
+CREATE TABLE IF NOT EXISTS `10162970_condos` (
   `id` smallint(16) NOT NULL AUTO_INCREMENT,
   `name` varchar(32) COLLATE utf8_estonian_ci NOT NULL,
   `numberofapartments` smallint(3) NOT NULL,
@@ -62,10 +57,10 @@ CREATE TABLE IF NOT EXISTS `condos` (
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
--- Andmete tõmmistamine tabelile `condos`
+-- Andmete tõmmistamine tabelile `10162970_condos`
 --
 
-INSERT INTO `condos` (`id`, `name`, `numberofapartments`, `housenumber`, `street`, `city`, `county`) VALUES
+INSERT INTO `10162970_condos` (`id`, `name`, `numberofapartments`, `housenumber`, `street`, `city`, `county`) VALUES
 (1, 'Sinilille', 18, 13, 'Jalaka', 'Tartu', 'Tartumaa'),
 (2, 'Ülase', 30, 2, 'Vaba', 'Tartu', 'Tartumaa'),
 (3, 'Kihulane', 8, 69, 'Vildi', 'Võru', 'Võrumaa');
@@ -73,10 +68,10 @@ INSERT INTO `condos` (`id`, `name`, `numberofapartments`, `housenumber`, `street
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `counters`
+-- Tabeli struktuur tabelile `10162970_counters`
 --
 
-CREATE TABLE IF NOT EXISTS `counters` (
+CREATE TABLE IF NOT EXISTS `10162970_counters` (
   `id` smallint(16) NOT NULL AUTO_INCREMENT,
   `counter` smallint(16) NOT NULL,
   `date` date NOT NULL,
@@ -88,10 +83,10 @@ CREATE TABLE IF NOT EXISTS `counters` (
 -- --------------------------------------------------------
 
 --
--- Tabeli struktuur tabelile `users`
+-- Tabeli struktuur tabelile `10162970_users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE IF NOT EXISTS `10162970_users` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) COLLATE utf8_estonian_ci NOT NULL,
   `password` varchar(32) COLLATE utf8_estonian_ci NOT NULL,
@@ -102,10 +97,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_estonian_ci;
 
 --
--- Andmete tõmmistamine tabelile `users`
+-- Andmete tõmmistamine tabelile `10162970_users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `email`, `apartment`) VALUES
+INSERT INTO `10162970_users` (`id`, `username`, `password`, `email`, `apartment`) VALUES
 (4, 'allarvendla@gmai', 'parool', 'allarvendla@gmail.com', 1);
 
 --
@@ -113,22 +108,22 @@ INSERT INTO `users` (`id`, `username`, `password`, `email`, `apartment`) VALUES
 --
 
 --
--- Piirangud tabelile `apartments`
+-- Piirangud tabelile `10162970_apartments`
 --
-ALTER TABLE `apartments`
-  ADD CONSTRAINT `apartments_ibfk_1` FOREIGN KEY (`condoid`) REFERENCES `condos` (`id`);
+ALTER TABLE `10162970_apartments`
+  ADD CONSTRAINT `10162970_apartments_ibfk_1` FOREIGN KEY (`condoid`) REFERENCES `10162970_condos` (`id`);
 
 --
--- Piirangud tabelile `counters`
+-- Piirangud tabelile `10162970_counters`
 --
-ALTER TABLE `counters`
-  ADD CONSTRAINT `counters_ibfk_1` FOREIGN KEY (`apartmentid`) REFERENCES `apartments` (`id`);
+ALTER TABLE `10162970_counters`
+  ADD CONSTRAINT `10162970_counters_ibfk_1` FOREIGN KEY (`apartmentid`) REFERENCES `10162970_apartments` (`id`);
 
 --
--- Piirangud tabelile `users`
+-- Piirangud tabelile `10162970_users`
 --
-ALTER TABLE `users`
-  ADD CONSTRAINT `users_ibfk_1` FOREIGN KEY (`apartment`) REFERENCES `apartments` (`id`);
+ALTER TABLE `10162970_users`
+  ADD CONSTRAINT `10162970_users_ibfk_1` FOREIGN KEY (`apartment`) REFERENCES `10162970_apartments` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
