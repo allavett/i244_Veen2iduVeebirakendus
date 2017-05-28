@@ -1,6 +1,5 @@
 <script>
     var condos = <?php echo json_encode($condos); ?>;
-    console.log(condos);
 </script>
 <script src="assets/script/register.js"></script>
 

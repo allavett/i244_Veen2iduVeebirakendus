@@ -1,11 +1,12 @@
 /**
  * Created by AllarVendla on 27.02.2017.
  */
-var formInputFields, submitButton, usernameFilled, passwordFilled, emailFilled, areaFilled, condoFilled, apartmentFilled;
+var formInputFields, submitButton, usernameFilled, passwordFilled, passwordConfirmFilled, emailFilled, areaFilled, condoFilled, apartmentFilled;
 
 formInputFields = ["username", "password", "confirm-password", "email", "area", "condo", "apartment", "register-button"];
 usernameFilled = false;
 passwordFilled = false;
+passwordConfirmFilled = false;
 emailFilled = false;
 areaFilled = false;
 condoFilled = false;
@@ -27,6 +28,15 @@ window.document.addEventListener("DOMContentLoaded", function () {
             responsiveCondoSelect();
         });
         if (inputField.id !== "area" || inputField.id !== "condo" || inputField.id !== "apartment") {
+            console.log(inputField.id, "if");
+            // Only allow for certain chars to be inserted
+            inputField.onkeypress = function(e){
+                var pressedKey = String.fromCharCode(e.which);
+                if (!pressedKey.match(/[A-Za-z0-9@+\-_.]/)) {
+                    return false;
+                }
+
+            }
             inputField.addEventListener("click", function(){
                 checkInput(inputField)
             });
@@ -38,27 +48,32 @@ window.document.addEventListener("DOMContentLoaded", function () {
 });
 
 function checkInput(inputField){
+    console.log(inputField.id);
     switch (inputField.id) {
         case "username":
             usernameFilled = checkLength();
+
             break;
         case "password":
-            checkLength();
+            passwordFilled = checkLength();
+            document.getElementById("confirm-password").setAttribute("class", "field-incorrect");
+            document.getElementById("confirm-password").value = "";
+            passwordConfirmFilled = false;
             break;
         case "confirm-password":
-            passwordFilled = checkLength();
+            passwordConfirmFilled = checkLength();
             break;
         case "email":
             emailFilled = checkLength();
             break;
         case "area":
-            areaFilled = checkValue();
+            areaFilled = checkSelection();
             break;
         case "condo":
-            condoFilled = checkValue();
+            condoFilled = checkSelection();
             break;
         case "apartment":
-            apartmentFilled = checkValue();
+            apartmentFilled = checkSelection();
             break;
         case "register-button":
             /*alert("Ju stupiido!");
@@ -71,11 +86,51 @@ function checkInput(inputField){
             inputField.setAttribute("class", "field-incorrect");
             return false;
         } else {
-            inputField.setAttribute("class", "field-correct");
-            return true;
+            return checkValue();
         }
     }
     function checkValue() {
+        switch (inputField.id) {
+            case "username":
+                var usernameForbiddenChars = /[!@#$%^&*()\=\[\]{};'`´:."\\|,<>\/?\s~]/;
+                if (usernameForbiddenChars.test(inputField.value)){
+                    inputField.setAttribute("class", "field-incorrect");
+                    return false;
+                } else {
+                    inputField.setAttribute("class", "field-correct");
+                    return inputField.value;
+                }
+                break;
+            case "email":
+                var emailForbiddenChars = /[!#$%^&*()\=\[\]{};'`´:"\\|,<>\/?\s~]/;
+                var emailValid = /\S+@\S+\.\S+/;
+                if (emailForbiddenChars.test(inputField.value) || !emailValid.test(inputField.value)){
+                    inputField.setAttribute("class", "field-incorrect");
+                    return false;
+                } else {
+                    inputField.setAttribute("class", "field-correct");
+                    return inputField.value;
+                }
+                break;
+            case "confirm-password":
+                passwordConfirmFilled = inputField.value;
+                if (passwordFilled === passwordConfirmFilled){
+                    console.log("if", passwordFilled, passwordConfirmFilled);
+                    inputField.setAttribute("class", "field-correct");
+                    return inputField.value;
+                } else {
+                    console.log("else", passwordFilled, passwordConfirmFilled);
+                    inputField.setAttribute("class", "field-incorrect");
+                    return false;
+                }
+            default:
+                inputField.setAttribute("class", "field-correct");
+                console.log(inputField.value);
+                return inputField.value;
+        }
+
+    }
+    function checkSelection() {
         if (inputField.value === "0"){
             inputField.setAttribute("class", "field-incorrect");
             return false;
@@ -84,9 +139,10 @@ function checkInput(inputField){
             return inputField.value;
         }
     }
-    submitButton.disabled = !(usernameFilled && passwordFilled && emailFilled && condoFilled && areaFilled && apartmentFilled);
+    submitButton.disabled = !(usernameFilled && passwordConfirmFilled && emailFilled && condoFilled && areaFilled && apartmentFilled);
 }
 
+// Function to make Condo selection responsive
 function responsiveCondoSelect() {
     var area, condo, apartment;
     area = document.getElementById("area");
