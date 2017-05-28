@@ -31,11 +31,6 @@
                            value="<?php echo isset($email) ? $email : ""; ?>"></td>
                 <td><?php if (isset($registerErrors["email"])) {echo $registerErrors["email"];} ?></td>
             </tr>
-            <!--
-           Järgnev valik peaks sõltuma eelnevast.. Javascript/PHP - ilmselt natukene mõlemat.
-           TODO!!! SELECT VALIKUTE GENEMISE TSÜKLID ON MARUKOLEDAD D:
-           mõistlik oleks need ilmselt mingi funktsiooniga lahendada.
-           -->
             <tr>
                 <td><label for="area">Piirkond:</label></td>
                 <td><select id="area" class="select-option" name="area">
@@ -99,7 +94,7 @@
                 <td><?php if (isset($registerErrors["apartment"])) {echo $registerErrors["apartment"];} ?></td>
             </tr>
             <tr>
-                <td colspan="3"><input id="register-button" type="submit" name="register" value="Registreeri"></td>
+                <td colspan="3"><input id="register-button" class="button" type="submit" name="register" value="Registreeri"></td>
             </tr>
 
         </table>

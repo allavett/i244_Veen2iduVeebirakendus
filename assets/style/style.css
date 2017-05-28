@@ -51,12 +51,12 @@
     clear: both;
 }
 
-.register-form label {
+label {
     font: 13px Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
 
-.register-form input, select {
+input, select {
     box-sizing: border-box;
     border: 1px solid #C2C2C2;
     box-shadow: 1px 1px 4px #EBEBEB;
@@ -64,16 +64,16 @@
     padding: 5px;
     outline: none;
 }
-.register-form input:focus, select:focus {
+input:focus, select:focus {
     border: 1px solid #38bd00;
 }
 
-.register-form select.select-option:focus {
+select.select-option:focus {
     background-color: #ddffd3;
     border-color: #38bd00;
 }
 
-#register-button {
+.button {
     padding: 0;
     background: #38bd00;
     color: white;
@@ -85,12 +85,12 @@
     font: bold 15px arial, sans-serif;
 }
 
-#register-button:disabled {
+.button:disabled {
     background: #92bfa3;
     color: #acddbf;
 }
 
-#register-button:hover:not([disabled]) {
+.button:hover:not([disabled]) {
     background: #56ea00;
 }
 

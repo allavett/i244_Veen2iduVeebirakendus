@@ -15,7 +15,7 @@
                 <td><?php if (isset($loginError)) {echo $loginError;} ?></td>
             </tr>
             <tr>
-                <td colspan="3"><input id="login-button" type="submit" name="login" value="Logi sisse"></td>
+                <td colspan="3"><input id="login-button" class="button" type="submit" name="login" value="Logi sisse"></td>
             </tr>
 
         </table>

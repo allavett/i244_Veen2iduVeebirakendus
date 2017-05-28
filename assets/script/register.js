@@ -19,7 +19,9 @@ window.document.addEventListener("DOMContentLoaded", function () {
     formInputFields.forEach(function (inputFieldId) {
         var inputField;
         inputField = document.getElementById(inputFieldId);
-        inputField.setAttribute("class", "field-incorrect");
+        if (inputField.id !== "register-button"){
+            inputField.setAttribute("class", "field-incorrect");
+        }
         inputField.addEventListener("change", function(){
             checkInput(inputField);
             responsiveCondoSelect();
