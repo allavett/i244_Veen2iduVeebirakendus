@@ -1,3 +1,7 @@
+<script>
+    var condos = <?php echo json_encode($condos); ?>;
+    console.log(condos);
+</script>
 <script src="assets/script/register.js"></script>
 
 <h1>Registreeri uus kasutaja.</h1>
@@ -56,17 +60,16 @@
                 <td><label for="condo">Korteriühistu:</label></td>
                 <td><select id="condo" class="select-option" name="condo">
                     <?php
-                    echo "condo = ".$condo;
                     if (!isset($condo)) {
                         echo "<option value=\"" . 0 . "\" selected>Vali..</option>";
                     } else {
                         echo "<option value=\"" . 0 . "\">Vali..</option>";
                     }
-                    foreach (array_unique(array_column($condos, "name")) as $condoName) {
-                        if (isset($condo) && $condo == strtolower($condoName)) {
-                            echo "<option value=\"".strtolower($condoName)."\" selected>".$condoName."</option>";
+                    foreach ($condos as $condo) {
+                        if (isset($condo) && $condo == strtolower($condo["name"])) {
+                            echo "<option value=\"".$condo["id"]."\" selected>".$condo["name"]."</option>";
                         } else {
-                            echo "<option value=\"".strtolower($condoName)."\">".$condoName."</option>";
+                            echo "<option value=\"".$condo["id"]."\">".$condo["name"]."</option>";
                         }
                     }
                     ?>
@@ -77,7 +80,7 @@
                 <td><label for="apartment">Korter:</label></td>
                 <td><select id="apartment" class="select-option" name="apartment">
                         <?php
-                        echo "apartment = ".$apartment;
+                        //echo "apartment = ".$apartment;
                         for ($i = 0; $i <= max(array_column($condos, "numberofapartments")); $i++) {
                             if ($i == 0 && !isset($apartment)){
                                 echo "<option value=\"".$i."\" selected>Vali..</option>";
@@ -96,7 +99,7 @@
                 <td><?php if (isset($registerErrors["apartment"])) {echo $registerErrors["apartment"];} ?></td>
             </tr>
             <tr>
-                <td colspan="3"><input id="register-button" type="submit" name="register" value="Registreeri" disabled></td>
+                <td colspan="3"><input id="register-button" type="submit" name="register" value="Registreeri"></td>
             </tr>
 
         </table>

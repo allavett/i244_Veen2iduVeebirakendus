@@ -7,22 +7,25 @@ formInputFields = ["username", "password", "confirm-password", "email", "area", 
 usernameFilled = false;
 passwordFilled = false;
 emailFilled = false;
-condoFilled = false;
 areaFilled = false;
+condoFilled = false;
 apartmentFilled = false;
 
 window.document.addEventListener("DOMContentLoaded", function () {
+    responsiveCondoSelect();
     submitButton = document.getElementById("register-button");
+
+    checkInput(submitButton); // Disable register button when page is loaded
     formInputFields.forEach(function (inputFieldId) {
         var inputField;
-        console.log(inputField);
         inputField = document.getElementById(inputFieldId);
-
-        inputField.addEventListener("click", function(){
-            checkInput(inputField)
+        inputField.setAttribute("class", "field-incorrect");
+        inputField.addEventListener("change", function(){
+            checkInput(inputField);
+            responsiveCondoSelect();
         });
-        if (inputField.id !== "register-button") {
-            inputField.addEventListener("change", function(){
+        if (inputField.id !== "area" || inputField.id !== "condo" || inputField.id !== "apartment") {
+            inputField.addEventListener("click", function(){
                 checkInput(inputField)
             });
             inputField.addEventListener("keyup", function(){
@@ -59,7 +62,7 @@ function checkInput(inputField){
             /*alert("Ju stupiido!");
             event.preventDefault();*/
             break;
-        default: console.log("blaa");
+        default: console.log("Something went blaa");
     }
     function checkLength() {
         if (inputField.value.length < 6){
@@ -76,15 +79,65 @@ function checkInput(inputField){
             return false;
         } else {
             inputField.setAttribute("class", "field-correct");
-            return true;
+            return inputField.value;
         }
     }
     submitButton.disabled = !(usernameFilled && passwordFilled && emailFilled && condoFilled && areaFilled && apartmentFilled);
-    /*
-    if (usernameFilled && passwordFilled && emailFilled && condoFilled && areaFilled) {
-        submitButton.disabled = false;
-    } else {
-        submitButton.disabled = true;
+}
+
+function responsiveCondoSelect() {
+    var area, condo, apartment;
+    area = document.getElementById("area");
+    condo = document.getElementById("condo");
+    apartment = document.getElementById("apartment");
+    // Disable/enable condo and apartment select
+    condo.disabled = !areaFilled;
+    apartment.disabled = !condoFilled;
+
+    if (condos){
+        // Fill condos selection with correct values and disable apartments
+        if (areaFilled) {
+            if (document.activeElement == area) {
+                // remove all options from condo and apartment
+                removeOptions(condo);
+                condoFilled = false;
+                removeOptions(apartment);
+                apartmentFilled = false;
+                condos.forEach(function (item) {
+                    if (item["county"].toLowerCase() == areaFilled) {
+                        var newCondoOption = new Option(item["name"], item["id"]);
+                        condo.options.add(newCondoOption);
+                    }
+                })
+            }
+        } else {
+            condo.disabled = true;
+            apartment.disabled = true;
+            removeOptions(condo);
+            removeOptions(apartment);
+            condoFilled = false;
+            apartmentFilled = false;
+        }
+        if (condoFilled && document.activeElement == condo) {
+            // remove all options from apartment
+            removeOptions(apartment);
+            apartmentFilled = false;
+            condos.forEach( function (item) {
+                if (item["id"] == condoFilled){
+                    for (i = 1; i <= item["numberofapartments"]; i++){
+                        var newapArtmentOption = new Option(i, item["id"]);
+                        apartment.options.add(newapArtmentOption);
+                    }
+                }
+            })
+        }
     }
-    */
+
+    //Function for removing items from selection
+    function removeOptions(selectItem){
+        while (selectItem.options.length - 1) {
+            selectItem.remove(1);
+        }
+        selectItem.setAttribute("class", "field-incorrect");
+    }
 }
