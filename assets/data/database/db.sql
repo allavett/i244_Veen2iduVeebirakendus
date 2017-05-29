@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS `10162970_counters` (
 CREATE TABLE IF NOT EXISTS `10162970_users` (
   `id` smallint(6) NOT NULL AUTO_INCREMENT,
   `username` varchar(16) COLLATE utf8_estonian_ci NOT NULL,
-  `password` varchar(32) COLLATE utf8_estonian_ci NOT NULL,
+  `password` varchar(60) COLLATE utf8_estonian_ci NOT NULL,
   `email` varchar(32) COLLATE utf8_estonian_ci NOT NULL,
   `apartment` smallint(16) NOT NULL,
   PRIMARY KEY (`id`),

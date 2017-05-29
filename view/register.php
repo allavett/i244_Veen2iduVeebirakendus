@@ -40,10 +40,10 @@
                             echo "<option value=\"" . 0 . "\">Vali..</option>";
                         }
                         foreach (array_unique(array_column($condos, "county")) as $areaName) {
-                            if (isset($area) && $area == strtolower($areaName)) {
-                                echo "<option value=\"".strtolower($areaName)."\" selected>".$areaName."</option>";
+                            if (isset($area) && $area == $areaName) {
+                                echo "<option value=\"".$areaName."\" selected>".$areaName."</option>";
                             } else {
-                                echo "<option value=\"".strtolower($areaName)."\">".$areaName."</option>";
+                                echo "<option value=\"".$areaName."\">".$areaName."</option>";
                             }
                         }
                         ?>
@@ -59,11 +59,11 @@
                     } else {
                         echo "<option value=\"" . 0 . "\">Vali..</option>";
                     }
-                    foreach ($condos as $condo) {
-                        if (isset($condo) && $condo == strtolower($condo["name"])) {
-                            echo "<option value=\"".$condo["id"]."\" selected>".$condo["name"]."</option>";
+                    foreach ($condos as $condoItem) {
+                        if (isset($condo) && $condo == strtolower($condoItem["id"])) {
+                            echo "<option value=\"".$condoItem["id"]."\" selected>".$condoItem["name"]."</option>";
                         } else {
-                            echo "<option value=\"".$condo["id"]."\">".$condo["name"]."</option>";
+                            echo "<option value=\"".$condoItem["id"]."\">".$condoItem["name"]."</option>";
                         }
                     }
                     ?>

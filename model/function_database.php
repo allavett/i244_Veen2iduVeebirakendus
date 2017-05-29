@@ -51,14 +51,49 @@ function checkPostedCondoInformation() {
     $connection->close();
 }
 
+function checkPostedUser() {
+    connect();
+    global $connection, $username, $registerErrors;
+    if ($statement = $connection->prepare("SELECT u.username FROM test.`10162970_users` u WHERE u.username = ?")){
+        $statement->bind_param("s", $username);
+        $statement->execute();
+        $queryResult = $statement->get_result();
+        $userQuery = mysqli_fetch_assoc($queryResult);
+        if (!empty($userQuery["username"])){
+            $registerErrors["username"] = "Selle nimega kasutaja on juba olemas!";
+        }
+        $statement->close();
+    }
+    $connection->close();
+}
+
 function registerUser() {
     connect();
     global $connection, $username, $password, $email, $apartment;
     if ($statement = $connection->prepare("INSERT INTO test.`10162970_users` (username, password, email, apartment) VALUES (?, ?, ?, ?)")){
-        $statement->bind_param("ssss", $username, $password, $email, $apartment);
+        $statement->bind_param("ssss", $username, password_hash($password, PASSWORD_DEFAULT), $email, $apartment);
         $statement->execute();
         $statement->close();
+    } else {
+        die("probleem regamisega");
     }
+    $connection->close();
+}
 
+function userLogin() {
+    connect();
+    global $connection, $username, $password, $userId, $loginError;
+    if ($statement = $connection->prepare("SELECT u.id, u.password FROM test.`10162970_users` u WHERE u.username = ?")){
+        $statement->bind_param("s", $username);
+        $statement->execute();
+        $queryResult = $statement->get_result();
+        $userQuery = mysqli_fetch_assoc($queryResult);
+        if (password_verify($password, $userQuery["password"])) {
+            $userId = $userQuery["id"];
+        } else {
+            $loginError = "Kasutajanimi või parool on vale!";
+        }
+        $statement->close();
+    }
     $connection->close();
 }

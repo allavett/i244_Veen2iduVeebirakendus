@@ -13,13 +13,14 @@ condoFilled = false;
 apartmentFilled = false;
 
 window.document.addEventListener("DOMContentLoaded", function () {
-    responsiveCondoSelect();
+
     submitButton = document.getElementById("register-button");
 
     checkInput(submitButton); // Disable register button when page is loaded
     formInputFields.forEach(function (inputFieldId) {
         var inputField;
         inputField = document.getElementById(inputFieldId);
+
         if (inputField.id !== "register-button"){
             inputField.setAttribute("class", "field-incorrect");
         }
@@ -28,7 +29,6 @@ window.document.addEventListener("DOMContentLoaded", function () {
             responsiveCondoSelect();
         });
         if (inputField.id !== "area" || inputField.id !== "condo" || inputField.id !== "apartment") {
-            console.log(inputField.id, "if");
             // Only allow for certain chars to be inserted
             inputField.onkeypress = function(e){
                 var pressedKey = String.fromCharCode(e.which);
@@ -44,15 +44,15 @@ window.document.addEventListener("DOMContentLoaded", function () {
                 checkInput(inputField)
             });
         }
+        checkInput(inputField); //Check input fields on refresh
     })
+    responsiveCondoSelect();
 });
 
 function checkInput(inputField){
-    console.log(inputField.id);
     switch (inputField.id) {
         case "username":
             usernameFilled = checkLength();
-
             break;
         case "password":
             passwordFilled = checkLength();
@@ -115,17 +115,14 @@ function checkInput(inputField){
             case "confirm-password":
                 passwordConfirmFilled = inputField.value;
                 if (passwordFilled === passwordConfirmFilled){
-                    console.log("if", passwordFilled, passwordConfirmFilled);
                     inputField.setAttribute("class", "field-correct");
                     return inputField.value;
                 } else {
-                    console.log("else", passwordFilled, passwordConfirmFilled);
                     inputField.setAttribute("class", "field-incorrect");
                     return false;
                 }
             default:
                 inputField.setAttribute("class", "field-correct");
-                console.log(inputField.value);
                 return inputField.value;
         }
 
@@ -153,49 +150,87 @@ function responsiveCondoSelect() {
     apartment.disabled = !condoFilled;
 
     if (condos){
+        // Pean kontrollima ühistuid, mille piirkond klapib valitud piirkonnaga, kui ei klapi, siis eemaldan valiku.
         // Fill condos selection with correct values and disable apartments
+
         if (areaFilled) {
-            if (document.activeElement == area) {
-                // remove all options from condo and apartment
-                removeOptions(condo);
-                condoFilled = false;
-                removeOptions(apartment);
-                apartmentFilled = false;
+            // Eemaldab üleliigsed valikud
+            for (i = condo.options.length -1 ; i > 0; i--){
+                var optionPresent = false;
+                var option = condo.options.item(i);
                 condos.forEach(function (item) {
-                    if (item["county"].toLowerCase() == areaFilled) {
+                    if (item["county"] === areaFilled && item["id"] === parseInt(option.value)){
+                        optionPresent = true;
+                    }
+                });
+                if (optionPresent === false){
+                    option.remove();
+                    setIncorrect(condo);
+                }
+            }
+
+            // Lisab puuduolevad
+            condos.forEach(function (item) {
+                if (item["county"] === areaFilled) {
+                    var optionNeeded = true;
+                    // Siin käin kõik optionid üle ja kontrollin, kas on sellise IDga olemas. Kui ei ole, lisan
+                    for (i = 0; i < condo.options.length; i++){
+                        var option =  condo.options.item(i);
+                        if (item["id"] === parseInt(option.value)){
+                            optionNeeded = false;
+                        } else {
+                            optionNeeded = optionNeeded * true;
+                        }
+                    }
+                    if (optionNeeded){
                         var newCondoOption = new Option(item["name"], item["id"]);
                         condo.options.add(newCondoOption);
+                        condoFilled = setIncorrect(condo);
                     }
-                })
-            }
+                }
+            });
+
         } else {
             condo.disabled = true;
             apartment.disabled = true;
-            removeOptions(condo);
-            removeOptions(apartment);
-            condoFilled = false;
-            apartmentFilled = false;
+            condoFilled = removeOptions(condo);
+            apartmentFilled = removeOptions(apartment);
         }
-        if (condoFilled && document.activeElement == condo) {
-            // remove all options from apartment
-            removeOptions(apartment);
-            apartmentFilled = false;
+        if (condoFilled) {
             condos.forEach( function (item) {
-                if (item["id"] == condoFilled){
-                    for (i = 1; i <= item["numberofapartments"]; i++){
-                        var newapArtmentOption = new Option(i, item["id"]);
-                        apartment.options.add(newapArtmentOption);
+                if (item["id"] === parseInt(condoFilled)){
+                    var apartmentOptionsCount = apartment.options.length;
+                    var numberOfApartments = item["numberofapartments"];
+                    if (apartmentOptionsCount > numberOfApartments) {
+                        for (i = apartmentOptionsCount - 1; i > numberOfApartments; i--){
+                            apartment.options.item(i).remove();
+                            setIncorrect(apartment);
+                        }
+                    } else if (apartmentOptionsCount < numberOfApartments) {
+                        for (i = apartmentOptionsCount; i <= numberOfApartments; i++) {
+                            var newApartment = new Option(i, i);
+                            apartment.options.add(newApartment);
+                            setIncorrect(apartment);
+                        }
                     }
                 }
-            })
+            });
+        } else {
+            apartmentFilled = removeOptions(apartment);
         }
     }
-
+    function setIncorrect(selectItem) {
+        if (parseInt(selectItem.value) === 0) {
+            condo.setAttribute("class", "field-incorrect")
+        }
+        return false;
+    }
     //Function for removing items from selection
     function removeOptions(selectItem){
         while (selectItem.options.length - 1) {
             selectItem.remove(1);
         }
         selectItem.setAttribute("class", "field-incorrect");
+        return false;
     }
 }

@@ -1,3 +1,8 @@
+<?php
+if (!empty($_GET["action"]) && $_GET["action"] == "registered") {
+    echo "<p>Kasutaja registreeritud!</p>";
+}
+?>
 <h1>Logi sisse:</h1>
 
 <div class="login-form">

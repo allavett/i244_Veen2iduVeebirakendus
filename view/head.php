@@ -6,9 +6,9 @@
     <div id="menu">
         <ul>
             <li><a href="index.php">Avaleht</a></li>
-            <li><?php echo isset($_SESSION["user"]) ? '<a href="index.php?view=counters">Näidud</a>' :
+            <li><?php echo isset($_SESSION["id"]) ? '<a href="index.php?view=counters">Näidud</a>' :
                     '<a href="index.php?view=register">Registreeri</a>';?></li></li>
-            <li><?php echo isset($_SESSION["user"]) ? '<a href="index.php?action=logout">Logi välja</a>' :
+            <li><?php echo isset($_SESSION["id"]) ? '<a href="index.php?action=logout">Logi välja</a>' :
                     '<a href="index.php?view=login">Logi sisse</a>';?></li>
         </ul>
     </div>

@@ -42,22 +42,23 @@ function register(){
             }
         }
         checkPostedCondoInformation();
+        checkPostedUser();
     } else {
         header("Location: ./index.php?view=register");
     }
-    // Kui andmed on olemas ja andmed on korrektsed - vigu ei ole - siis registreeri kasutaja (kirje andmebaasi).
+    // Kui andmed on olemas ja andmed on korrektsed - vigu ei ole - siis registreeri kasutaja (kirje andmebaasi) ja
+    // suuna Login lehele.
     if (empty($registerErrors)){
         registerUser();
+        header("Location: ./index.php?view=login&action=registered");
     }
 }
 
 function check_input($input) {
     if (!empty($input)) {
-        //echo "algne ".$input. "<br>";
         $input = trim($input);
         $input = stripslashes($input);
         $input = htmlspecialchars($input);
-        //echo "uus ". $input. "<br>";
         return $input;
     }
 }

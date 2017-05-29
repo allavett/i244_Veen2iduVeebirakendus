@@ -7,17 +7,16 @@
  */
 
 function login() {
-    global $loginError, $username;
-    $loginError = $username = $password = "";
+    global $loginError, $username, $password, $userId;
+    $loginError = $username = $password =  $userId = "";
     if (isset($_POST["login"])) {
         if (!empty($_POST["username"]) && !empty($_POST["password"])){
             $username = check_input($_POST["username"]);
             $password = check_input($_POST["password"]);
-            if ($username == "kasutaja" && $password == "parool") {
-                $_SESSION["user"] = $username;
+            userLogin();
+            if (empty($loginError)) {
+                $_SESSION["id"] = $userId;
                 header("Location: ./index.php");
-            } else {
-                $loginError = "Kasutajanimi või parool on vale!";
             }
         } else {
             $loginError = "Mõlemad väljad peavad olema täidetud";
