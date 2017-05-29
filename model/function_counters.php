@@ -12,7 +12,7 @@ function submitCounter() {
         if (!empty($_POST["counter"]) && !empty($_SESSION["id"])){
             $counter = check_input($_POST["counter"]);
             $userId = check_input($_SESSION["id"]);
-            userLogin();
+            insertNewCounter();
             if (empty($submitCounterError)) {
                 header("Location: ./index.php?view=counters&action=counterSubmitted");
             }
@@ -20,4 +20,10 @@ function submitCounter() {
             $submitCounterError = "Midagi läks valesti (näit sisestamata?)";
         }
     }
+}
+
+function getOldCounter() {
+    global $userId;
+    $userId = check_input($_SESSION["id"]);
+    selectOldCounter();
 }

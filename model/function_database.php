@@ -12,8 +12,8 @@ function connect() {
     $user="root";
     $pass="";
     $db="test";
-    $connection = new mysqli($host, $user, $pass, $db) or die("Ei saa andmebaasiga ühendust - ".mysqli_error($connection));
-    mysqli_query($connection, "SET CHARACTER SET UTF8") or die("Ei saanud baasi utf-8-sse - ".mysqli_error($connection));
+    $connection = new mysqli($host, $user, $pass, $db) or die("Ei saa andmebaasiga ühendust");
+    mysqli_query($connection, "SET CHARACTER SET UTF8");
 }
 
 function getCondos() {
@@ -40,8 +40,8 @@ function checkPostedCondoInformation() {
         $statement->execute();
         $queryResult = $statement->get_result();
         while ($condoQuery = mysqli_fetch_assoc($queryResult)){
-            if ($apartment > 0 && $apartment <= $condoQuery["numberofapartments"]){
-                $condoId = $condoQuery["id"];
+            if ($apartment > 0 && $apartment <= check_input($condoQuery["numberofapartments"])){
+                $condoId = check_input($condoQuery["id"]);
             } else {
                 $registerErrors["apartment"] = "Sellist korterit valitud majas ei ole!";
             }
@@ -89,9 +89,41 @@ function userLogin() {
         $queryResult = $statement->get_result();
         $userQuery = mysqli_fetch_assoc($queryResult);
         if (password_verify($password, $userQuery["password"])) {
-            $userId = $userQuery["id"];
+            $userId = check_input($userQuery["id"]);
         } else {
             $loginError = "Kasutajanimi või parool on vale!";
+        }
+        $statement->close();
+    }
+    $connection->close();
+}
+
+function insertNewCounter() {
+    connect();
+    global $connection, $userId, $counter;
+    if ($statement = $connection->prepare("INSERT INTO test.`10162970_counters` (counter, userid, date) VALUES (?, ?, now() )")){
+        $statement->bind_param("ss", $counter, $userId);
+        $statement->execute();
+        $statement->close();
+    } else {
+        die("Probleem näidu edastamisega");
+    }
+    $connection->close();
+}
+
+function selectOldCounter() {
+    connect();
+    global $connection, $userId, $oldCounter, $counterDate, $getOldCounterError;
+    if ($statement = $connection->prepare("SELECT c.counter, c.date FROM test.`10162970_counters` c WHERE c.userid = ? ORDER BY c.id DESC ")){
+        $statement->bind_param("s", $userId);
+        $statement->execute();
+        $queryResult = $statement->get_result();
+        $counterQuery = mysqli_fetch_assoc($queryResult);
+        if (!empty($counterQuery)) {
+            $oldCounter = check_input($counterQuery["counter"]);
+            $counterDate = check_input($counterQuery["date"]);
+        } else {
+            $getOldCounterError = "Hetkel näit puudub!";
         }
         $statement->close();
     }
