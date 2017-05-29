@@ -9,7 +9,7 @@ function submitCounter() {
     global $submitCounterError, $counter, $userId;
     $submitCounterError = $counter = $userId = "";
     if (isset($_POST["submitCounter"])) {
-        if (!empty($_POST["counter"]) && !empty($_Session["id"])){
+        if (!empty($_POST["counter"]) && !empty($_SESSION["id"])){
             $counter = check_input($_POST["counter"]);
             $userId = check_input($_SESSION["id"]);
             userLogin();
