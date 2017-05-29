@@ -10,6 +10,7 @@ require_once ('./model/function_register.php');
 require_once ('./model/function_login_logout.php');
 require_once ('./model/function_session.php');
 require_once ('./model/function_database.php');
+require_once ('./model/function_counters.php');
 
 $view = $action = "";
 
@@ -31,6 +32,7 @@ switch ($action) {
         login();
         break;
     case 'submitCounter':
+        submitCounter();
         break;
     case 'logout':
         logout();

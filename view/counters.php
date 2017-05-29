@@ -1,7 +1,7 @@
 <h1>Näidud</h1>
 
 <div class="submitCounter-form">
-    <form action="index.php?view=counters&action=submit" method="POST">
+    <form action="index.php?view=counters&action=submitCounter" method="POST">
         <table>
             <tr>
                 <td><label for="counter">Uus näit:</label>
