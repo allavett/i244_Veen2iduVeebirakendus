@@ -36,7 +36,7 @@ window.document.addEventListener("DOMContentLoaded", function () {
                     return false;
                 }
 
-            }
+            };
             inputField.addEventListener("click", function(){
                 checkInput(inputField)
             });
@@ -45,7 +45,7 @@ window.document.addEventListener("DOMContentLoaded", function () {
             });
         }
         checkInput(inputField); //Check input fields on refresh
-    })
+    });
     responsiveCondoSelect();
 });
 
@@ -155,7 +155,7 @@ function responsiveCondoSelect() {
 
         if (areaFilled) {
             // Eemaldab üleliigsed valikud
-            for (i = condo.options.length -1 ; i > 0; i--){
+            for (var i = condo.options.length -1 ; i > 0; i--){
                 var optionPresent = false;
                 var option = condo.options.item(i);
                 condos.forEach(function (item) {

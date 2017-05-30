@@ -44,13 +44,13 @@ function register(){
         checkPostedCondoInformation();
         checkPostedUser();
     } else {
-        header("Location: ./index.php?view=register");
+        header("Location: .?view=register");
     }
     // Kui andmed on olemas ja andmed on korrektsed - vigu ei ole - siis registreeri kasutaja (kirje andmebaasi) ja
     // suuna Login lehele.
     if (empty($registerErrors)){
         registerUser();
-        header("Location: ./index.php?view=login&action=registered");
+        header("Location: .?view=login&action=registered");
     }
 }
 

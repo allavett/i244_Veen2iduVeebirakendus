@@ -51,7 +51,7 @@ switch ($view) {
         include_once ('./view/login.php');
         break;
     case 'counters':
-        getOldCounter();
+        getOldCounters();
         include_once ('./view/counters.php');
         break;
     default: include_once ('./view/main.html');

@@ -14,16 +14,20 @@ function submitCounter() {
             $userId = check_input($_SESSION["id"]);
             insertNewCounter();
             if (empty($submitCounterError)) {
-                header("Location: ./index.php?view=counters&action=counterSubmitted");
+                header("Location: .?view=counters&action=counterSubmitted");
             }
         } else {
-            $submitCounterError = "Midagi läks valesti (näit sisestamata?)";
+            $submitCounterError = "Midagi läks valesti (kogus sisestamata?)";
         }
     }
 }
 
-function getOldCounter() {
+function getOldCounters() {
     global $userId;
-    $userId = check_input($_SESSION["id"]);
-    selectOldCounter();
+    if (isset($_SESSION["id"])){
+        $userId = check_input($_SESSION["id"]);
+        selectOldCounters();
+    } else {
+        header("Location: .");
+    }
 }

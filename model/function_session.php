@@ -17,4 +17,5 @@ function endSession() {
         setcookie(session_name(), "", time()-24*60*60);
     }
     session_destroy();
+    header("Location: .");
 }

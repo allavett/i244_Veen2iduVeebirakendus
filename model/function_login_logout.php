@@ -16,7 +16,7 @@ function login() {
             userLogin();
             if (empty($loginError)) {
                 $_SESSION["id"] = $userId;
-                header("Location: ./index.php");
+                header("Location: .");
             }
         } else {
             $loginError = "Mõlemad väljad peavad olema täidetud";

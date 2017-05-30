@@ -74,8 +74,6 @@ function registerUser() {
         $statement->bind_param("ssss", $username, password_hash($password, PASSWORD_DEFAULT), $email, $apartment);
         $statement->execute();
         $statement->close();
-    } else {
-        die("probleem regamisega");
     }
     $connection->close();
 }
@@ -105,27 +103,29 @@ function insertNewCounter() {
         $statement->bind_param("ss", $counter, $userId);
         $statement->execute();
         $statement->close();
-    } else {
-        die("Probleem näidu edastamisega");
     }
     $connection->close();
 }
 
-function selectOldCounter() {
+function selectOldCounters() {
     connect();
-    global $connection, $userId, $oldCounter, $counterDate, $getOldCounterError;
-    if ($statement = $connection->prepare("SELECT c.counter, c.date FROM test.`10162970_counters` c WHERE c.userid = ? ORDER BY c.id DESC ")){
+    global $connection, $userId, $oldCounter, $counterDate, $selectOldCountersError, $counters;
+    $counters = array();
+    if ($statement = $connection->prepare("SELECT c.counter, c.date FROM test.`10162970_counters` c WHERE c.userid = ? ORDER BY c.id ASC ")){
         $statement->bind_param("s", $userId);
         $statement->execute();
         $queryResult = $statement->get_result();
-        $counterQuery = mysqli_fetch_assoc($queryResult);
-        if (!empty($counterQuery)) {
-            $oldCounter = check_input($counterQuery["counter"]);
-            $counterDate = check_input($counterQuery["date"]);
-        } else {
-            $getOldCounterError = "Hetkel näit puudub!";
+        while ($counter = mysqli_fetch_assoc($queryResult)) {
+            $counterDate = check_input($counter["date"]);
+            //echo $myDate;
+            $oldCounter = check_input($counter["counter"]);
+            $counters[] = array(
+                "date" => $counterDate,
+                "value" => $oldCounter
+            );
         }
         $statement->close();
     }
     $connection->close();
+    $counters = json_encode($counters);
 }
