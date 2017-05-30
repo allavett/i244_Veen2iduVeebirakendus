@@ -9,8 +9,8 @@
 function connect() {
     global $connection;
     $host="localhost";
-    $user="test";
-    $pass="t3st3r123";
+    $user="root";
+    $pass="";
     $db="test";
     $connection = new mysqli($host, $user, $pass, $db) or die("Ei saa andmebaasiga ühendust");
     mysqli_query($connection, "SET CHARACTER SET UTF8");
