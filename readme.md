@@ -35,14 +35,17 @@ Kasutaja saab veenäitu edastada, kui on sisse logitud
 
 ### Tarbimisajaloo vaade
 Kasutaja saab vaadata tarbimisajalugu, kui on sisse logitud
-* Perioodi alguse valik
-* Perioodi lõpu valik
 
 ### Lisa
 * Algoritm
+
 ![alt text](assets/data/images/algoritm.png "Algoritm")
+
 * Andmebaas
+
 ![alt text](assets/data/images/dbTables.png "Algoritm")
+
+* Graafiku joonistamiseks kasutatud amCharts (https://www.amcharts.com/) teeke.
 
 ## Litsents
 Attribution-NonCommercial 4.0 International (CC BY-NC 4.0)

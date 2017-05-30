@@ -5,7 +5,6 @@
 var date, lastDayOfTheMonth, interval;
 interval = 0;
 date = new Date;
-console.log("test");
 window.document.addEventListener("DOMContentLoaded", function () {
     var currentDateElement = document.getElementById("current-date");
     var daysRemainingElement = document.getElementById("days-remaining");
