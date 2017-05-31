@@ -73,6 +73,9 @@ function registerUser() {
     if ($statement = $connection->prepare("INSERT INTO test.`10162970_users` (username, password, email, apartment) VALUES (?, ?, ?, ?)")){
         $statement->bind_param("ssss", $username, password_hash($password, PASSWORD_DEFAULT), $email, $apartment);
         $statement->execute();
+        if (!empty(mysqli_error($connection))){
+            die(mysqli_error($connection));
+        }
         $statement->close();
     } else {
         $registerErrors["general"] = "Probleem kasutaja registreerimisega.";
