@@ -1,16 +1,24 @@
-<!-- Resources -->
-<script src="https://www.amcharts.com/lib/3/amcharts.js" type="text/javascript"></script>
-<script src="https://www.amcharts.com/lib/3/serial.js" type="text/javascript"></script>
-<script src="https://www.amcharts.com/lib/3/plugins/export/export.min.js" type="text/javascript"></script>
-<script src="https://www.amcharts.com/lib/3/themes/light.js" type="text/javascript"></script>
-<link rel="stylesheet" href="https://www.amcharts.com/lib/3/plugins/export/export.css" type="text/css" media="all" />
-<script src="assets/script/chart.js" type="text/javascript"></script>
-<script>var chartData = <?php echo isset($counters) ? $counters : "" ; ?></script>
+
 
 <h1>Näidud</h1>
 
 <!-- Chart -->
-<div id="chartdiv"></div>
+<!-- Counter Resources -->
+<?php
+//Draw chart only if data is present
+if (isset($counters) && count(json_decode($counters)) > 0){
+    echo "
+        <script src=\"https://www.amcharts.com/lib/3/amcharts.js\" type=\"text/javascript\"></script>
+        <script src=\"https://www.amcharts.com/lib/3/serial.js\" type=\"text/javascript\"></script>
+        <script src=\"https://www.amcharts.com/lib/3/plugins/export/export.min.js\" type=\"text/javascript\"></script>
+        <script src=\"https://www.amcharts.com/lib/3/themes/light.js\" type=\"text/javascript\"></script>
+        <link rel=\"stylesheet\" href=\"https://www.amcharts.com/lib/3/plugins/export/export.css\" type=\"text/css\" media=\"all\" />
+        <script src=\"assets/script/chart.js\" type=\"text/javascript\"></script>
+        <script>var chartData =" . $counters ."</script>
+        <div id=\"chartdiv\"></div>
+    ";
+}
+?>
 
 <div class="submitCounter-form">
     <form action="index.php?view=counters&action=submitCounter" method="POST">
