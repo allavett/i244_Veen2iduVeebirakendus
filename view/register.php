@@ -9,6 +9,9 @@
     <form action="index.php?view=register&action=register" method="POST">
         <table>
             <tr>
+                <td colspan="3"><?php echo isset($registerErrors["general"]) ? "Viga: ".$registerErrors["general"] : ""; ?></td>
+            </tr>
+            <tr>
                 <td><label for="username">Kasutaja:</label></td>
                 <td><input id="username" name="username" type="text" placeholder="Sisesta kasutajanimi"
                            value="<?php echo isset($username) ? $username : ""; ?>"></td>

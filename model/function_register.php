@@ -50,7 +50,9 @@ function register(){
     // suuna Login lehele.
     if (empty($registerErrors)){
         registerUser();
-        header("Location: .?view=login&action=registered");
+        if (empty($registerErrors)){
+            header("Location: .?view=login&action=registered");
+        }
     }
 }
 

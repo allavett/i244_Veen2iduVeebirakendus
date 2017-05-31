@@ -69,11 +69,13 @@ function checkPostedUser() {
 
 function registerUser() {
     connect();
-    global $connection, $username, $password, $email, $apartment;
+    global $connection, $username, $password, $email, $apartment, $registerErrors;
     if ($statement = $connection->prepare("INSERT INTO test.`10162970_users` (username, password, email, apartment) VALUES (?, ?, ?, ?)")){
         $statement->bind_param("ssss", $username, password_hash($password, PASSWORD_DEFAULT), $email, $apartment);
         $statement->execute();
         $statement->close();
+    } else {
+        $registerErrors["general"] = "Probleem kasutaja registreerimisega.";
     }
     $connection->close();
 }
